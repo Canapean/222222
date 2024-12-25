@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>EZJI</title>
+</head>
+<body>
+<a href="{% url 'black:create' %}"><h1>Create</h1></a>
+<a href="{% url 'black:read' %}"><h1>Main</h1></a>
+<hr>
+{% if cats %}
+{% for cat in cats %}
+<a href="{% url 'black:detail' cat.id %}"><h3>{{ cat.name }}: {{ cat.is_status }}</h3></a>
+<a href="{% url 'black:update' cat.id %}">update</a>
+<a href="{% url 'black:delete' cat.id %}">delete</a>
+{% endfor %}
+{% endif %}
+
+{% if form %}
+<form action="" method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="send">
+</form>
+{% endif %}
+
+{% if cat %}
+<h1>Name:{{ cat.name }}<br>Age:{{ cat.age }}, Status {{ cat.is_status }}</h1>
+{% endif %}
+
+<!--{% if delete %}-->
+<!--<h1>Name:{{ cat.name }}<br>Age:{{ cat.age }}, Status {{ cat.is_status }}</h1>-->
+<!--<form action="" method="post">-->
+<!--    {% csrf_token %}-->
+<!--    <input type="submit" value="delete">-->
+<!--</form>-->
+<!--{% endif %}-->
+
+</body>
+</html>
